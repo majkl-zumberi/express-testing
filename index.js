@@ -1,9 +1,11 @@
 const express = require('express')
-const app = express()
 const { v4: uuidv4 } = require('uuid')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
+const document = require('./api/document')
+const app = express()
+app.use(document)
 app.use(cors())
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server started!')
