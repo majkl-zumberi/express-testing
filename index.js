@@ -1,11 +1,11 @@
-const express = require('express')
-const { v4: uuidv4 } = require('uuid')
-const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
-const cors = require('cors')
-const document = require('./api/document')
+import express from 'express'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
+import api from './api'
+
 const app = express()
-app.use(document)
+app.use(api)
 app.use(cors())
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server started!')
@@ -13,7 +13,3 @@ app.listen(process.env.PORT || 3000, () => {
 app.use(bodyParser.json())
 app.use(bodyParser.text())
 app.use(cookieParser())
-app.route('/rest/token').get((req, res) => {
-  const token = uuidv4()
-  return res.json({ token })
-})
