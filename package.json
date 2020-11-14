@@ -2,8 +2,9 @@
   "name": "express-testing",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
+    "babel-core": "^6.26.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bodymen": "^1.1.1",
@@ -35,7 +36,7 @@
     "passport-http-bearer": "^1.0.1"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+    "start": "node ."
   },
   "repository": {
     "type": "git",
