@@ -4,7 +4,6 @@ import cors from 'cors'
 import api from './api'
 import { errorHandler as queryErrorHandler } from 'querymen'
 import { errorHandler as bodyErrorHandler } from 'bodymen'
-import compression from 'compression'
 
 const app = express()
 const genericErrorHandler = (err, req, res, next) => {
@@ -26,9 +25,7 @@ const genericErrorHandler = (err, req, res, next) => {
 }
 app.use(bodyParser.json())
 app.use(api)
-app.use(compression())
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(queryErrorHandler())
 app.use(bodyErrorHandler())
 app.use(genericErrorHandler)
