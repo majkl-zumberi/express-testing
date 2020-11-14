@@ -5,7 +5,6 @@ import api from './api'
 import { errorHandler as queryErrorHandler } from 'querymen'
 import { errorHandler as bodyErrorHandler } from 'bodymen'
 import compression from 'compression'
-import http from 'http'
 
 const app = express()
 const genericErrorHandler = (err, req, res, next) => {
@@ -33,9 +32,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(queryErrorHandler())
 app.use(bodyErrorHandler())
 app.use(genericErrorHandler)
-const server = http.createServer(app)
-setImmediate(() => {
-  server.listen(process.env.PORT || 3000, () => {
-    console.log('Server started!')
-  })
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server started!')
 })
