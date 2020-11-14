@@ -25,7 +25,7 @@ export const schema =
         },
         done: {
           type: Boolean,
-          default: false
+          required: false
         },
         note: {
           type: String,
