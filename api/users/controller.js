@@ -6,7 +6,7 @@ export const actions = {
   get ({ querymen }, res, next) {
     try {
       let dataRes = data
-      if (querymen.body) dataRes = _.filter(data, querymen.query)
+      if (querymen.query) dataRes = _.filter(data, querymen.query)
       dataRes = _.map(dataRes, o => view(o))
       return res.json(dataRes)
     } catch (e) {

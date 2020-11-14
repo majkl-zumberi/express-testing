@@ -1,12 +1,12 @@
 import _ from 'lodash'
-import {data} from './model'
-import {v4 as uuid} from 'uuid'
+import { data } from './model'
+import { v4 as uuid } from 'uuid'
 
 export const actions = {
   get ({ querymen }, res, next) {
     try {
       let dataRes = data
-      if (querymen.body) dataRes = _.filter(data, querymen.query)
+      if (querymen.query) dataRes = _.filter(data, querymen.query)
       return res.json(dataRes)
     } catch (e) {
       next()
