@@ -1,13 +1,13 @@
 import _ from 'lodash'
-import { data } from '../document/model'
 import { v4 as uuid } from 'uuid'
 import bcrypt from 'bcryptjs'
-
+import { view, data } from './model'
 export const actions = {
   get ({ querymen }, res, next) {
     try {
       let dataRes = data
       if (querymen.body) dataRes = _.filter(data, querymen.query)
+      dataRes = _.map(dataRes, o => view(o))
       return res.json(dataRes)
     } catch (e) {
       next()
@@ -20,7 +20,7 @@ export const actions = {
         .catch(next)
       const obj = { ...(bodymen.body), id: uuid(), createdAt: _.now(), password }
       data.push(obj)
-      return res.json(obj)
+      return res.json(view(obj))
     } catch (e) {
       next()
     }
