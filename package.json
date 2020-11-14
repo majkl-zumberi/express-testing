@@ -37,7 +37,7 @@
   },
   "scripts": {
     "express": "nodemon --exec babel-node index.js ",
-    "start": "npm run express"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
