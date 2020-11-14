@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 import * as User from '../users/model'
-import {sign} from '../../services/jwt'
+import { sign } from '../../services/jwt'
 
 const actions = {}
 

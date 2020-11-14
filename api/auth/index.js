@@ -1,6 +1,6 @@
-import {Router} from 'express'
+import { Router } from 'express'
 
-import {password, token} from '../../services/passport'
+import { password, token } from '../../services/passport'
 import actions from './controller'
 
 const router = new Router()

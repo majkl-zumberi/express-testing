@@ -1,8 +1,8 @@
 import passport from 'passport'
-import {data as userData, roles as userRoles} from '../../api/users/model'
+import { data as userData, roles as userRoles } from '../../api/users/model'
 import _ from 'lodash'
-import {ExtractJwt, Strategy as JwtStrategy} from 'passport-jwt'
-import {BasicStrategy} from 'passport-http'
+import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt'
+import { BasicStrategy } from 'passport-http'
 import bcrypt from 'bcryptjs'
 
 export const password = () => (req, res, next) => passport.authenticate('basic', { session: false }, (err, user, msg) => {

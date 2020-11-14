@@ -1,9 +1,9 @@
-import {Router} from 'express'
-import {middleware as query} from 'querymen'
-import {middleware as body} from 'bodymen'
-import {actions} from './controller'
-import {schema} from './model'
-import {token} from '../../services/passport'
+import { Router } from 'express'
+import { middleware as query } from 'querymen'
+import { middleware as body } from 'bodymen'
+import { actions } from './controller'
+import { schema } from './model'
+import { token } from '../../services/passport'
 
 const router = new Router()
 

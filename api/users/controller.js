@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import {data} from '../document/model'
-import {v4 as uuid} from 'uuid'
+import { data } from '../document/model'
+import { v4 as uuid } from 'uuid'
 import bcrypt from 'bcryptjs'
 
 export const actions = {
