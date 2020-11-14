@@ -33,8 +33,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "passport-http-bearer": "^1.0.1"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "nodemon --exec babel-node index.js"
   },
