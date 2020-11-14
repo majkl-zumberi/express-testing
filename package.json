@@ -35,8 +35,7 @@
     "passport-http-bearer": "^1.0.1"
   },
   "scripts": {
-    "express": "nodemon --exec babel-node index.js ",
-    "start": "node index.js"
+    "start": "nodemon --exec babel-node index.js"
   },
   "repository": {
     "type": "git",
