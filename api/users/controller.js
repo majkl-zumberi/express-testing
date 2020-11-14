@@ -15,9 +15,7 @@ export const actions = {
   },
   async create ({ bodymen }, res, next) {
     try {
-      const password = await bcrypt.hash(bodymen.body.password, 4)
-
-        .catch(next)
+      const password = await bcrypt.hash(bodymen.body.password, 4).catch(next)
       const obj = { ...(bodymen.body), id: uuid(), createdAt: _.now(), password }
       data.push(obj)
       return res.json(view(obj))
