@@ -8,6 +8,7 @@ import { token } from '../../services/passport'
 const router = new Router()
 
 router.get('/', token({ required: true }), query(schema.query), actions.get)
+router.get('/schema', token({ required: true }), actions.getSchema)
 
 router.get('/:id', token({ required: true }), actions.show)
 

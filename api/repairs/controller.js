@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { data, devicePrices } from './model'
+import { data, devicePrices, schema } from './model'
 import { v4 as uuid } from 'uuid'
 import moment from 'moment'
 
@@ -9,6 +9,13 @@ export const actions = {
       let dataRes = data
       if (querymen.query) dataRes = _.filter(data, querymen.query)
       return res.json(dataRes)
+    } catch (e) {
+      next()
+    }
+  },
+  getSchema (req, res, next) {
+    try {
+      return res.json(schema.update)
     } catch (e) {
       next()
     }
