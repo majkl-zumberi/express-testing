@@ -26,7 +26,7 @@ export const actions = {
 
   create ({ bodymen }, res, next) {
     try {
-      const obj = { ...(bodymen.body), id: uuid(), createdAt: moment().format("yyyy-MM-DD'T'HH:mm:ss.'000Z'") }
+      const obj = { ...(bodymen.body), id: uuid(), createdAt: moment().format("yyyy-MM-DD'T'HH:mm:ss.000Z") }
       const startTime = moment(obj.startTime)
       const endTime = moment(obj.endTime)
       let duration = 0
@@ -50,7 +50,7 @@ export const actions = {
 
   update ({ params, bodymen }, res, next) {
     let dataRes = _.find(data, { id: params.id })
-    dataRes = { ...dataRes, ...(bodymen.body), updatedAt: moment().format("yyyy-MM-DD'T'HH:mm:ss.'000Z'") }
+    dataRes = { ...dataRes, ...(bodymen.body), updatedAt: moment().format("yyyy-MM-DD'T'HH:mm:ss.000Z") }
     const startTime = moment(dataRes.startTime)
     const endTime = moment(dataRes.endTime)
     let duration = 0
