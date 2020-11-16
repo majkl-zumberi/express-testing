@@ -1,6 +1,7 @@
 import _ from 'lodash'
-import { data } from './model'
+import { data, devicePrices } from './model'
 import { v4 as uuid } from 'uuid'
+import moment from 'moment'
 
 export const actions = {
   get ({ querymen }, res, next) {
@@ -26,6 +27,20 @@ export const actions = {
   create ({ bodymen }, res, next) {
     try {
       const obj = { ...(bodymen.body), id: uuid(), createdAt: _.now() }
+      const startTime = moment(obj.startTime)
+      const endTime = moment(obj.endTime)
+      let duration = 0
+      if (startTime.dayOfYear() === endTime.dayOfYear()) {
+        duration = _.round(endTime.diff(startTime) / 1000 / 60 / 60, 2)
+      } else {
+        const numberOfDays = endTime.diff(startTime, 'days')
+        // calc working hours 9:00-13:00 14:00-18:00
+        duration = (18 - startTime.hours() - 1) + _.round((0 - startTime.minutes()) / 60, 2)
+        duration += (numberOfDays - 2) * 8
+        duration += (endTime.hours() - 9 - 1) + _.round((0 + endTime.minutes()) / 60, 2)
+      }
+      obj.totalDuration = duration
+      obj.totalPrice = duration * devicePrices[obj.device].price
       data.push(obj)
       return res.json(obj)
     } catch (e) {
