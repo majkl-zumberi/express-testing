@@ -24,8 +24,8 @@ const genericErrorHandler = (err, req, res, next) => {
   }
 }
 index.use(bodyParser.json())
-index.use(api)
 index.use(cors())
+index.use(api)
 index.use(queryErrorHandler())
 index.use(bodyErrorHandler())
 index.use(genericErrorHandler)
