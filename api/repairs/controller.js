@@ -64,7 +64,7 @@ export const actions = {
       duration += (endTime.hours() - 9 - 1) + _.round(endTime.minutes() / 60, 2)
     }
     dataRes.totalDuration = duration
-    dataRes.totalPrice = duration * devicePrices[obj.device].price
+    dataRes.totalPrice = duration * devicePrices[dataRes.device].price
     _.remove(data, { id: params.id })
     data.push(dataRes)
     return res.json(dataRes)
