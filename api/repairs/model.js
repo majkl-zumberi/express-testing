@@ -13,6 +13,9 @@ export const schema =
         endTime: {
           type: Date
         },
+        createdAt: {
+          type: Date
+        },
         device: {
           type: String,
           enum: deviceType,
