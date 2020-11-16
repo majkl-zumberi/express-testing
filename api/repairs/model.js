@@ -21,7 +21,7 @@ export const schema =
         totalDuration: {
           type: Number
         },
-        totalCost: {
+        totalPrice: {
           type: Number
         }
       },
@@ -36,7 +36,7 @@ export const schema =
           type: String,
           enum: deviceType
         },
-        totalCost: {
+        totalPrice: {
           type: Number
         }
       },
@@ -51,7 +51,7 @@ export const schema =
           type: String,
           enum: deviceType
         },
-        totalCost: {
+        totalPrice: {
           type: Number
         }
       }
