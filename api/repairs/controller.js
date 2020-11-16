@@ -26,7 +26,7 @@ export const actions = {
 
   create ({ bodymen }, res, next) {
     try {
-      const obj = { ...(bodymen.body), id: uuid(), createdAt: moment().format() + 'Z' }
+      const obj = { ...(bodymen.body), id: uuid(), createdAt: moment().format('yyyy-mm-dd\'T\'hh:mm:ss.001\'Z\'') }
       const startTime = moment(obj.startTime)
       const endTime = moment(obj.endTime)
       let duration = 0
@@ -50,7 +50,21 @@ export const actions = {
 
   update ({ params, bodymen }, res, next) {
     let dataRes = _.find(data, { id: params.id })
-    dataRes = { ...dataRes, ...(bodymen.body), updatedAt: moment().format() + 'Z' }
+    dataRes = { ...dataRes, ...(bodymen.body), updatedAt: moment().format('yyyy-mm-dd\'T\'hh:mm:ss.001\'Z\'') }
+    const startTime = moment(dataRes.startTime)
+    const endTime = moment(dataRes.endTime)
+    let duration = 0
+    if (startTime.dayOfYear() === endTime.dayOfYear()) {
+      duration = _.round(endTime.diff(startTime) / 1000 / 60 / 60, 2)
+    } else {
+      const numberOfDays = endTime.diff(startTime, 'days')
+      // calc working hours 9:00-13:00 14:00-18:00
+      duration = (18 - startTime.hours() - 1) + _.round((0 - startTime.minutes()) / 60, 2)
+      duration += (numberOfDays - 2) * 8
+      duration += (endTime.hours() - 9 - 1) + _.round(endTime.minutes() / 60, 2)
+    }
+    dataRes.totalDuration = duration
+    dataRes.totalPrice = duration * devicePrices[obj.device].price
     _.remove(data, { id: params.id })
     data.push(dataRes)
     return res.json(dataRes)
