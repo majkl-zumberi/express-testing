@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { data, devicePrices } from './model'
+import { carPrices, data } from './model'
 import { v4 as uuid } from 'uuid'
 import moment from 'moment'
 
@@ -29,18 +29,9 @@ export const actions = {
       const obj = { ...(bodymen.body), id: uuid(), createdAt: moment().format('yyyy-MM-DDTHH:mm:ss.000[Z]') }
       const startTime = moment(obj.startTime)
       const endTime = moment(obj.endTime)
-      let duration = 0
-      if (startTime.dayOfYear() === endTime.dayOfYear()) {
-        duration = _.round(endTime.diff(startTime) / 1000 / 60 / 60, 2)
-      } else {
-        const numberOfDays = endTime.diff(startTime, 'days')
-        // calc working hours 9:00-13:00 14:00-18:00
-        duration = (18 - startTime.hours() - 1) + _.round((0 - startTime.minutes()) / 60, 2)
-        duration += (numberOfDays - 2) * 8
-        duration += (endTime.hours() - 9 - 1) + _.round(endTime.minutes() / 60, 2)
-      }
-      obj.totalDuration = duration
-      obj.totalPrice = duration * devicePrices[obj.device].price
+      const numberOfDays = endTime.diff(startTime, 'days')
+      obj.totalDuration = numberOfDays
+      obj.totalPrice = numberOfDays * carPrices[obj.car].price
       data.push(obj)
       return res.json(obj)
     } catch (e) {
@@ -53,18 +44,9 @@ export const actions = {
     dataRes = { ...dataRes, ...(bodymen.body), updatedAt: moment().format('yyyy-MM-DDTHH:mm:ss.000[Z]') }
     const startTime = moment(dataRes.startTime)
     const endTime = moment(dataRes.endTime)
-    let duration = 0
-    if (startTime.dayOfYear() === endTime.dayOfYear()) {
-      duration = _.round(endTime.diff(startTime) / 1000 / 60 / 60, 2)
-    } else {
-      const numberOfDays = endTime.diff(startTime, 'days')
-      // calc working hours 9:00-13:00 14:00-18:00
-      duration = (18 - startTime.hours() - 1) + _.round((0 - startTime.minutes()) / 60, 2)
-      duration += (numberOfDays - 2) * 8
-      duration += (endTime.hours() - 9 - 1) + _.round(endTime.minutes() / 60, 2)
-    }
-    dataRes.totalDuration = duration
-    dataRes.totalPrice = duration * devicePrices[dataRes.device].price
+    const numberOfDays = endTime.diff(startTime, 'days')
+    dataRes.totalDuration = numberOfDays
+    dataRes.totalPrice = numberOfDays * carPrices[dataRes.car].price
     _.remove(data, { id: params.id })
     data.push(dataRes)
     return res.json(dataRes)

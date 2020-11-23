@@ -1,9 +1,9 @@
-export const devicePrices = {
-  notebook: { price: 50 },
-  desktop: { price: 30 },
-  tablet: { price: 20 }
+export const carPrices = {
+  citycar: { price: 50 },
+  utilitaria: { price: 75 },
+  berlina: { price: 110 }
 }
-export const deviceType = ['notebook', 'desktop', 'tablet']
+export const carType = ['citycar', 'utilitaria', 'berlina']
 export const schema =
     {
       create: {
@@ -16,9 +16,13 @@ export const schema =
         createdAt: {
           type: Date
         },
-        device: {
+        plate: {
           type: String,
-          enum: deviceType,
+          required: true
+        },
+        car: {
+          type: String,
+          enum: carType,
           required: true
         },
         totalDuration: {
@@ -35,9 +39,15 @@ export const schema =
         endTime: {
           type: Date
         },
-        device: {
+        createdAt: {
+          type: Date
+        },
+        plate: {
+          type: String
+        },
+        car: {
           type: String,
-          enum: deviceType
+          enum: carType
         },
         totalPrice: {
           type: Number
@@ -50,9 +60,15 @@ export const schema =
         endTime: {
           type: Date
         },
-        device: {
+        createdAt: {
+          type: Date
+        },
+        plate: {
+          type: String
+        },
+        car: {
           type: String,
-          enum: deviceType
+          enum: carType
         },
         totalPrice: {
           type: Number
