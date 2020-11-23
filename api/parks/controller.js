@@ -30,7 +30,7 @@ export const actions = {
       const startTime = moment(obj.startTime)
       const endTime = moment(obj.endTime)
       const numberOfDays = endTime.diff(startTime, 'days')
-      obj.totalDuration = numberOfDays === 0 ? 1 : numberOfDays < 0 ? NaN : numberOfDays
+      obj.totalDuration = numberOfDays >= 0 ? numberOfDays + 1: numberOfDays < 0 ? NaN : numberOfDays
       obj.totalPrice = obj.totalDuration * carPrices[obj.car].price
       data.push(obj)
       return res.json(obj)
@@ -45,7 +45,7 @@ export const actions = {
     const startTime = moment(dataRes.startTime)
     const endTime = moment(dataRes.endTime)
     const numberOfDays = endTime.diff(startTime, 'days')
-    dataRes.totalDuration = numberOfDays === 0 ? 1 : numberOfDays < 0 ? NaN : numberOfDays
+    dataRes.totalDuration = numberOfDays >= 0 ? numberOfDays + 1: numberOfDays < 0 ? NaN : numberOfDays
     dataRes.totalPrice = dataRes.totalDuration * carPrices[dataRes.car].price
     _.remove(data, { id: params.id })
     data.push(dataRes)
