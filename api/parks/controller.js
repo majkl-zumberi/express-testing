@@ -26,7 +26,7 @@ export const actions = {
 
   create ({ bodymen }, res, next) {
     try {
-      const obj = { ...(bodymen.body), id: uuid(), createdAt: moment().format('yyyy-MM-DDTHH:mm:ss.000[Z]') }
+      const obj = { ...(bodymen.body), id: bodymen.body.plate, createdAt: moment().format('yyyy-MM-DDTHH:mm:ss.000[Z]') }
       const startTime = moment(obj.startTime)
       const endTime = moment(obj.endTime)
       const numberOfDays = endTime.diff(startTime, 'days')
